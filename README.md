@@ -25,7 +25,7 @@
 
 
 ## 🧠 Diary(Detail)
-### Trial(Jan 23)
+### Trial(Jan 24)
 - change SGD to AdamW
 - add Data Augumentation(hoizeontalflip, randomrotation,colorjitter)
 - increase epochs(5 -> 10) : too less epochs
