@@ -38,7 +38,7 @@
 ### problem(low accuracy)
 - still less accuracy
 ### Analysis
-- increase epochs with more diverse augumentation, especially Masking
+- increase epochs with more diverse augumentation, especially Masking(still looks like accuracy is soaring
 - need to figure out which type of classs or images get error mostly
 - might reduce the size of kernel
 -  
