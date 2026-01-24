@@ -13,7 +13,7 @@
 ## 🧠 Diary(Detail)
 ### Trial(Jan 23)
 ### result
-- running basic code
+- running basic code(accuracy 38%)
 <img width="1590" height="490" alt="image" src="https://github.com/user-attachments/assets/b56126f4-ac56-489b-af96-dd5aef532f2b" />
 
 ### problem
