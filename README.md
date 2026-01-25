@@ -2,7 +2,9 @@
 
 
 ## 🛠 Algorithms Used:
-- **RL (Soft Actor-Critic)**: -----
+- AdamW
+- DataAugumentation
+- fine-tuning layer
 - 
 ## 📅 Key milestone(summary)
 - **Jan 23:** running basic code & analysis principal problems that contribute to low performance
