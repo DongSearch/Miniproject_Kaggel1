@@ -3,12 +3,25 @@
 
 ## 🛠 Algorithms Used:
 - AdamW
-- DataAugumentation
-- fine-tuning layer
-- 
+### config
+- epoch : 10 -> 50
+- batchsize : 128->64->32
+### DataAugumentation
+- RandomHorizontalFlip
+- RandomRotation
+- ColorJitter
+- RandomErasing
+### Model(Resnet18)
+- fine-tuning layer : 7x7 kernel -> 3x3 kernel
+- last layer : output 1000 -> 10
+- Earlystopping
+- warmup scheduler(Linear)
+- main scheudler(ConsineAnnealingLR)
+- label smoothing 
 ## 📅 Key milestone(summary)
 - **Jan 23:** running basic code & analysis principal problems that contribute to low performance
 - **Jan 24:** change SGD to AdamW,add Data Augumentation, increase epochs, chagne first layer of model
+- **Jan 25:** add Earlystopping, scheuduler(warmup + main), masking(data pre-prossing), reduce batch-szie, increas epoch
 
 
 
