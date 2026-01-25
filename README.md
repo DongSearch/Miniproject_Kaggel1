@@ -1,5 +1,5 @@
 ## 🎯 Goal: 
-
+we need to improve performance of our custome model with small image datesets(5k,3x96x96, class:10(balanced dataset)
 
 ## 🛠 Algorithms Used:
 - AdamW
@@ -21,7 +21,7 @@
 ## 📅 Key milestone(summary)
 - **Jan 23:** running basic code & analysis principal problems that contribute to low performance
 - **Jan 24:** change SGD to AdamW,add Data Augumentation, increase epochs, chagne first layer of model
-- **Jan 25:** add Earlystopping, scheuduler(warmup + main), masking(data pre-prossing), reduce batch-szie, increas epoch
+- **Jan 25:** add Earlystopping, scheuduler(warmup + main), masking(data pre-prossing), reduce batch-size, increas epoch
 
 
 
@@ -56,4 +56,25 @@
 - increase epochs with more diverse augumentation, especially Masking(still looks like accuracy is soaring
 - need to figure out which type of classs or images get error mostly
 - might reduce the size of kernel
--  
+
+## 🧠 Diary(Detail)
+### Trial(Jan 25)
+- reduce batch_size : 64 ->32
+- add Data Augumentation(masking)
+- increase epochs(10 -> 50)
+- chagne last layer of model(output is 1000 -> 10)
+- add scheduler(warmup + main)
+- add label smoothing
+### result
+- improve the accuracy(76.8%)
+<img width="1589" height="490" alt="image" src="https://github.com/user-attachments/assets/378197d1-426e-4964-8637-b8fb7a0078a8" />
+
+### problem(low accuracy)
+- overfitting(less training-set, but resnet18 is relatively large model, which memorize noise and small detail)
+- from 25 epoch, that trend can be detected!
+### Analysis
+- it requires more data augumentation(mixup or cutmix)
+- each class has exactly same amount of data(no need focal loss) 
+- reduce model-spec(resnet10,8)
+- resnet dosen't have dropout
+- Batch Normalizaiton vs Group Normalization???
