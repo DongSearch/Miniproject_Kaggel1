@@ -25,6 +25,7 @@ we need to improve performance of our custome model with small image datesets(5k
 - **Jan 23:** running basic code & analysis principal problems that contribute to low performance
 - **Jan 24:** change SGD to AdamW,add Data Augumentation, increase epochs, chagne first layer of model
 - **Jan 25:** add Earlystopping, scheuduler(warmup + main), masking(data pre-prossing), reduce batch-size, increas epoch
+- **Jan 26:** add cutmix/mixup, change to custom resnet, increase batch size, no improvement of accuracy
 
 
 
@@ -92,15 +93,14 @@ we need to improve performance of our custome model with small image datesets(5k
 - reduce learning rate( 1e-4 -> 1e-3)
 - data augumentation for training was also applied to validation dataset!!!!!!!!!
 ### result
-- improve the accuracy()
+- improve the accuracy(74%)
+<img width="1587" height="490" alt="image" src="https://github.com/user-attachments/assets/3bbb3346-d43e-42b7-9ffb-32031d78192f" />
 
 
 ### problem(low accuracy)
-- overfitting(less training-set, but resnet18 is relatively large model, which memorize noise and small detail)
-- from 25 epoch, that trend can be detected!
+- not overfitting, but there's nothing to learn, which means both loss and accuracy can't decrease
 ### Analysis
-- it requires more data augumentation(mixup or cutmix)
-- each class has exactly same amount of data(no need focal loss) 
-- reduce model-spec(resnet10,8)
-- resnet dosen't have dropout
-- Batch Normalizaiton vs Group Normalization???
+- need to adjust a model
+- hyper parmeter setting
+- too much augumentation!
+
