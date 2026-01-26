@@ -4,16 +4,19 @@ we need to improve performance of our custome model with small image datesets(5k
 ## 🛠 Algorithms Used:
 - AdamW
 ### config
-- epoch : 10 -> 50
-- batchsize : 128->64->32
+- epoch : 10 -> 50 -> 100
+- batchsize : 128->64->32->64
 ### DataAugumentation
 - RandomHorizontalFlip
 - RandomRotation
 - ColorJitter
 - RandomErasing
+- Masking(Erasing)
+- MixUp / CutMix
 ### Model(Resnet18)
-- fine-tuning layer : 7x7 kernel -> 3x3 kernel
-- last layer : output 1000 -> 10
+- custom Resnet(same as 2blocks but different scale : 32-64-128-256, add dropout) 
+-  fine-tuning layer : 7x7 kernel -> 3x3 kernel ❌ (to heavy 11M parameters)
+- last layer : output 1000 -> 10 ❌ 
 - Earlystopping
 - warmup scheduler(Linear)
 - main scheudler(ConsineAnnealingLR)
@@ -68,6 +71,28 @@ we need to improve performance of our custome model with small image datesets(5k
 ### result
 - improve the accuracy(76.8%)
 <img width="1589" height="490" alt="image" src="https://github.com/user-attachments/assets/378197d1-426e-4964-8637-b8fb7a0078a8" />
+
+### problem(low accuracy)
+- overfitting(less training-set, but resnet18 is relatively large model, which memorize noise and small detail)
+- from 25 epoch, that trend can be detected!
+### Analysis
+- it requires more data augumentation(mixup or cutmix)
+- each class has exactly same amount of data(no need focal loss) 
+- reduce model-spec(resnet10,8)
+- resnet dosen't have dropout
+- Batch Normalizaiton vs Group Normalization???
+
+## 🧠 Diary(Detail)
+### Trial(Jan 26)
+- increase batch_size : 64(32 batch norm is a little bit unstable)
+- add Data Augumentation(Cutmix/Mixup)
+- increase epochs(50->100)
+- custom resnet model(add dropouts, reduce scale of parameter overall)
+- adjust label smoothing(0.1->0.05)
+- reduce learning rate( 1e-4 -> 1e-3)
+### result
+- improve the accuracy()
+
 
 ### problem(low accuracy)
 - overfitting(less training-set, but resnet18 is relatively large model, which memorize noise and small detail)
