@@ -90,6 +90,7 @@ we need to improve performance of our custome model with small image datesets(5k
 - custom resnet model(add dropouts, reduce scale of parameter overall)
 - adjust label smoothing(0.1->0.05)
 - reduce learning rate( 1e-4 -> 1e-3)
+- data augumentation for training was also applied to validation dataset!!!!!!!!!
 ### result
 - improve the accuracy()
 
