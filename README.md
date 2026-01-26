@@ -98,7 +98,7 @@ we need to improve performance of our custome model with small image datesets(5k
 
 
 ### problem(low accuracy)
-- not overfitting, but there's nothing to learn, which means both loss and accuracy can't decrease
+- not overfitting, but there's nothing to learn, which means both loss can't decrease and acc can't improve
 ### Analysis
 - need to adjust a model
 - hyper parmeter setting
