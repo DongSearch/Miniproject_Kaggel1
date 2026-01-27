@@ -8,13 +8,14 @@ we need to improve performance of our custome model with small image datesets(5k
 - batchsize : 128->64->32->64
 ### DataAugumentation
 - RandomHorizontalFlip
-- RandomRotation
-- ColorJitter
+- RandomAugment
+- RandomRotation ❌
+- ColorJitter ❌
 - RandomErasing
 - Masking(Erasing)
 - MixUp / CutMix
 ### Model(Resnet18)
-- custom Resnet(same as 2blocks but different scale : 32-64-128-256, add dropout) 
+- custom Resnet(same as 2blocks but different scale : 32-64-128-256, add dropout)->64(3)-128-256 
 -  fine-tuning layer : 7x7 kernel -> 3x3 kernel ❌ (to heavy 11M parameters)
 - last layer : output 1000 -> 10 ❌ 
 - Earlystopping
@@ -26,6 +27,7 @@ we need to improve performance of our custome model with small image datesets(5k
 - **Jan 24:** change SGD to AdamW,add Data Augumentation, increase epochs, chagne first layer of model
 - **Jan 25:** add Earlystopping, scheuduler(warmup + main), masking(data pre-prossing), reduce batch-size, increas epoch
 - **Jan 26:** add cutmix/mixup, change to custom resnet, increase batch size, no improvement of accuracy
+- **Jan 27:** add Random Data augumentation, change the block of models.
 
 
 
@@ -107,22 +109,18 @@ we need to improve performance of our custome model with small image datesets(5k
 
 ## 🧠 Diary(Detail)
 ### Trial(Jan 27)
-- increase batch_size : 64(32 batch norm is a little bit unstable)
-- add Data Augumentation(Cutmix/Mixup)
-- increase epochs(50->100)
-- custom resnet model(add dropouts, reduce scale of parameter overall)
-- adjust label smoothing(0.1->0.05)
-- reduce learning rate( 1e-4 -> 1e-3)
-- data augumentation for training was also applied to validation dataset!!!!!!!!!
+- add Random Augumentation
+- increase the size of channel in first layer to minize loss of features at the beginning
 ### result
 - improve the accuracy(86%)
 <img width="1589" height="490" alt="image" src="https://github.com/user-attachments/assets/601cc8be-6447-4bee-a636-b8e67fb13697" />
 
 ### problem(low accuracy)
-- not overfitting, but there's nothing to learn, which means both loss can't decrease and acc can't improve
+- changing model structure shows better performance, need to think about a way to improve more....
+- most of data augumentation are used
 ### Analysis
-- need to adjust a model
-- hyper parmeter setting
-- too much augumentation!
+- K-Fold : model is quite stable, so using it might imprvoe 2~3 % of them to vote decision of answers
+- SE Block : Squeeze and Excitation, which plays a similar role with attention to capture more detail of features 
+- Stochastic Detph : similar to Dropout, but it skips randomly some blocks
 
 
