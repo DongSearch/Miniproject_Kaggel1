@@ -14,6 +14,8 @@ we need to improve performance of our custome model with small image datesets(5k
 - RandomErasing
 - Masking(Erasing)
 - MixUp / CutMix
+
+
 ### Model(Resnet18)
 - custom Resnet(same as 2blocks but different scale : 32-64-128-256, add dropout)->64(3)-128-256 
 -  fine-tuning layer : 7x7 kernel -> 3x3 kernel ❌ (to heavy 11M parameters)
@@ -21,7 +23,11 @@ we need to improve performance of our custome model with small image datesets(5k
 - Earlystopping
 - warmup scheduler(Linear)
 - main scheudler(ConsineAnnealingLR)
-- label smoothing 
+- label smoothing
+- Stochastic Depth
+- SE Block
+- K-Fold
+- 
 ## 📅 Key milestone(summary)
 - **Jan 23:** running basic code & analysis principal problems that contribute to low performance
 - **Jan 24:** change SGD to AdamW,add Data Augumentation, increase epochs, chagne first layer of model
