@@ -104,3 +104,25 @@ we need to improve performance of our custome model with small image datesets(5k
 - hyper parmeter setting
 - too much augumentation!
 
+
+## 🧠 Diary(Detail)
+### Trial(Jan 27)
+- increase batch_size : 64(32 batch norm is a little bit unstable)
+- add Data Augumentation(Cutmix/Mixup)
+- increase epochs(50->100)
+- custom resnet model(add dropouts, reduce scale of parameter overall)
+- adjust label smoothing(0.1->0.05)
+- reduce learning rate( 1e-4 -> 1e-3)
+- data augumentation for training was also applied to validation dataset!!!!!!!!!
+### result
+- improve the accuracy(86%)
+<img width="1589" height="490" alt="image" src="https://github.com/user-attachments/assets/601cc8be-6447-4bee-a636-b8e67fb13697" />
+
+### problem(low accuracy)
+- not overfitting, but there's nothing to learn, which means both loss can't decrease and acc can't improve
+### Analysis
+- need to adjust a model
+- hyper parmeter setting
+- too much augumentation!
+
+
