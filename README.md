@@ -2,8 +2,8 @@
 we need to improve performance of our custome model with small image datesets
 
 ### Condition : 
-training data : 5k,3x96x96, class:10(balanced dataset)
-test data : 8k 3x96x96, class:10(balanced dataset)
+- training data : 5k,3x96x96, class:10(balanced dataset)
+- test data : 8k 3x96x96, class:10(balanced dataset)
 - no pretrained model
 - no change number of seed(0)
 
