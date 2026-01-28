@@ -2,38 +2,40 @@
 we need to improve performance of our custome model with small image datesets(5k,3x96x96, class:10(balanced dataset)
 
 ## 🛠 Algorithms Used:
-- AdamW
+### optimization
+- AdamW -> SGD Momentum -> SWOT
+- Earlystopping
+- warmup scheduler(Linear) ❌
+- main scheudler(ConsineAnnealingLR) ❌
 ### config
-- epoch : 10 -> 50 -> 100
+- epoch : 10 -> 50 -> 100->120
 - batchsize : 128->64->32->64
 ### DataAugumentation
 - RandomHorizontalFlip
 - RandomAugment
 - RandomRotation ❌
 - ColorJitter ❌
-- RandomErasing
-- Masking(Erasing)
+- RandomErasing ❌
 - MixUp / CutMix
 
-
 ### Model(Resnet18)
-- custom Resnet(same as 2blocks but different scale : 32-64-128-256, add dropout)->64(3)-128-256 
+- custom Resnet(same as 2blocks but different scale : 32-64-128-256, add dropout)->64(3)-128-256
+- > 64-128-256-512(each of them has two blocks)
 -  fine-tuning layer : 7x7 kernel -> 3x3 kernel ❌ (to heavy 11M parameters)
 - last layer : output 1000 -> 10 ❌ 
-- Earlystopping
-- warmup scheduler(Linear)
-- main scheudler(ConsineAnnealingLR)
-- label smoothing
-- Stochastic Depth
-- SE Block
-- K-Fold
-- 
+- label smoothing ❌
+- Stochastic Depth❌
+- SE Block❌
+- K-Fold❌
+
 ## 📅 Key milestone(summary)
 - **Jan 23:** running basic code & analysis principal problems that contribute to low performance
 - **Jan 24:** change SGD to AdamW,add Data Augumentation, increase epochs, chagne first layer of model
 - **Jan 25:** add Earlystopping, scheuduler(warmup + main), masking(data pre-prossing), reduce batch-size, increas epoch
 - **Jan 26:** add cutmix/mixup, change to custom resnet, increase batch size, no improvement of accuracy
-- **Jan 27:** add Random Data augumentation, change the block of models.
+- **Jan 27:** add Random Data augumentation, change the block of models
+- **Jan 28:** remove SEblock, remove Masking, add SWOT!!(quite effective), convert model layer
+
 
 
 
@@ -129,4 +131,32 @@ we need to improve performance of our custome model with small image datesets(5k
 - SE Block : Squeeze and Excitation, which plays a similar role with attention to capture more detail of features 
 - Stochastic Detph : similar to Dropout, but it skips randomly some blocks
 
+### problem(low accuracy)
+- not overfitting, but there's nothing to learn, which means both loss can't decrease and acc can't improve
+### Analysis
+- need to adjust a model
+- hyper parmeter setting
+- too much augumentation!
+
+
+## 🧠 Diary(Detail)
+### Trial(Jan 28)
+- remove K-fold
+- remove SE Block
+- change optimizer to SWOT(AdamW + SGD momentum)
+
+### result
+- improve the accuracy(86%)
+<img width="1589" height="490" alt="image" src="https://github.com/user-attachments/assets/601cc8be-6447-4bee-a636-b8e67fb13697" />
+
+### problem(low accuracy)
+- SGD is quite sensitive to learning rate and very slow to converge, while Adam is less accurate but guarantees fast convergence) 
+- K-fold : it takes too long time to train because it needs to train xN times, also if it has less K, validation proportion is quite high, which means it has less training data set per model
+- SE block : I would expect to capture more small detail. but it deteriotate performance( my guess is data augumentation and SE don't have good relation)
+- Mixup/cutmix already make label vague, so using label_smoothing makes it worse 
+### Analysis
+- K-Fold :after making model very very stable, it recommends,otherwise it arouses negative effect
+- SE Block : it tries to capture too much detail for small model and less dataset, side-effect
+- scale of Data augumentation(Masking, augument, Mixup/Cutmix) need to be adjusted
+- Balance between overfitting and underfitting is quite tricky!
 
