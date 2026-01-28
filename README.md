@@ -1,12 +1,17 @@
 ## 🎯 Goal: 
-we need to improve performance of our custome model with small image datesets(5k,3x96x96, class:10(balanced dataset)
+we need to improve performance of our custome model with small image datesets
+Condition : 
+training data : 5k,3x96x96, class:10(balanced dataset)
+test data : 8k 3x96x96, class:10(balanced dataset)
+- no pretrained model
+- no change number of seed(0)
 
-## 🛠 Algorithms Used:
+## 🛠 Algorithms Used(& Trial):
 ### optimization
 - AdamW -> SGD Momentum -> SWOT
 - Earlystopping
 - warmup scheduler(Linear) ❌
-- main scheudler(ConsineAnnealingLR) ❌
+- main scheudler(ConsineAnnealingLR) 
 ### config
 - epoch : 10 -> 50 -> 100->120
 - batchsize : 128->64->32->64
