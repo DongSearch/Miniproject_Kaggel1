@@ -1,4 +1,4 @@
-###Mixup and CutMix
+###Mixup & CutMix
 
 1. Mixup : it mix up two different images and labels making desision boundary more vauge and doing generalization
 2. CutMix : it cut off one part of image, and part of another one is attached to it
