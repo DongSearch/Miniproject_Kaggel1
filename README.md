@@ -65,6 +65,7 @@ reach to best accruacy with balanced and less data sets
 - **Jan 27:** add Random Data augumentation, change the block of models
 - **Jan 28:** remove SEblock, remove Masking, add SWOT!!(quite effective), convert model layer
 - **Jan 29:** SGD, dynamic label smoothing, reduce vailidation set(10%->8%)
+- **Jan 30:** Experiement(EMA,AdamW) + analysis confusion matrix + code optimization
 
 
 
