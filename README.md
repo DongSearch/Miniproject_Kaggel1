@@ -43,7 +43,7 @@ we need to improve performance of our custome model with small image datesets
 - **Jan 26:** add cutmix/mixup, change to custom resnet, increase batch size, no improvement of accuracy
 - **Jan 27:** add Random Data augumentation, change the block of models
 - **Jan 28:** remove SEblock, remove Masking, add SWOT!!(quite effective), convert model layer
-- **Jan 29:** SGD, dynamic label smoothing, 
+- **Jan 29:** SGD, dynamic label smoothing, reduce vailidation set(10%->8%)
 
 
 
@@ -175,6 +175,7 @@ we need to improve performance of our custome model with small image datesets
 - split label smoothing more strategically
 - final training
 - TTA
+- reduce validation set(10%->8%)
 
 ### result
 - improve the accuracy(89%)
@@ -186,6 +187,7 @@ we need to improve performance of our custome model with small image datesets
 - as model doesn't show overfitting trend, but literally there is nothing to learn anymore, both training and validation loss get saturated, so when I try to reach that point, I alleviate label-smooting, so it looks like squeezing accuracy a little bit more like 1.5%
 - Final training : K-fold takes too much time, but instead of that I use retrain all of dataset(includng validation set), it gives 0.4% augument of accuracy(**but it looks like gambling beacuse adjusting learning rate is quite tricky and we can't know which one is the best model without validation set**
 - I try to add one more block at last step hoping it helps learning more, but it doesn't help at all(increasing width seems to be better, but I will pass it to next expriement(less time left)
+- 8% arise unstable vibration, but label scheudling and dynamic label-smoothing help converging, but I also try it with 5%, it doesn't give trustable result at all
 ### Analysis
 - As this model, it looks like reaching the maximum performance, but still one day left I will try to experiment another way
 
