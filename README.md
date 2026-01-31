@@ -12,7 +12,7 @@ reach to best accruacy with balanced and less data sets
 
 ## Used Algorithm
 - model : Custom RestNet + SE Block + Drop path : 64(2)-128(2)-256(2)-512(2) Blocks
-- optimizer : Warmup LRscheduling(Linear) + main LRscheduling(CosineAnnealing)- AdamW 
+- optimizer : Warmup LRscheduling(Linear) + main LRscheduling(CosineAnnealing) + AdamW 
 - Criterion : SoftTargetCrossEntorpy(for Mixup/Cutmix) + CrossEntropy + dynamic label-smoothing
 - Data-Preprocessing : RandAugment,HorizontalFlip,Mixup/Cutmix
 - Technique : TTA + EMA
