@@ -9,12 +9,13 @@ we need to improve performance of our custome model with small image datesets
 
 ## 🛠 Algorithms Used(& Trial):
 ### optimization
-- AdamW -> SGD Momentum -> SWOT
+- AdamW -> SGD Momentum -> SWOT -> SGD
 - Earlystopping
 - warmup scheduler(Linear) ❌
-- main scheudler(ConsineAnnealingLR) 
+- main scheudler(ConsineAnnealingLR)
+- Dynamic label-scheudling
 ### config
-- epoch : 10 -> 50 -> 100->120
+- epoch : 10 -> 50 -> 100->120->200
 - batchsize : 128->64->32->64
 ### DataAugumentation
 - RandomHorizontalFlip
@@ -23,15 +24,16 @@ we need to improve performance of our custome model with small image datesets
 - ColorJitter ❌
 - RandomErasing ❌
 - MixUp / CutMix
-
+### TEST
+- TTA 2 data augumentation(6 is too much)
 ### Model(Resnet18)
 - custom Resnet(same as 2blocks but different scale : 32-64-128-256, add dropout)->64(3)-128-256
 - > 64-128-256-512(each of them has two blocks)
 -  fine-tuning layer : 7x7 kernel -> 3x3 kernel ❌ (to heavy 11M parameters)
 - last layer : output 1000 -> 10 ❌ 
-- label smoothing ❌
-- Stochastic Depth❌
-- SE Block❌
+- label smoothing 
+- Stochastic Depth
+- SE Bloc
 - K-Fold❌
 
 ## 📅 Key milestone(summary)
@@ -41,6 +43,7 @@ we need to improve performance of our custome model with small image datesets
 - **Jan 26:** add cutmix/mixup, change to custom resnet, increase batch size, no improvement of accuracy
 - **Jan 27:** add Random Data augumentation, change the block of models
 - **Jan 28:** remove SEblock, remove Masking, add SWOT!!(quite effective), convert model layer
+- **Jan 29:** SGD, dynamic label smoothing, 
 
 
 
@@ -165,4 +168,25 @@ we need to improve performance of our custome model with small image datesets
 - SE Block : it tries to capture too much detail for small model and less dataset, side-effect
 - scale of Data augumentation(Masking, augument, Mixup/Cutmix) need to be adjusted
 - Balance between overfitting and underfitting is quite tricky!
+
+
+### Trial(Jan 29)
+- change it to SGD
+- split label smoothing more strategically
+- final training
+- TTA
+
+### result
+- improve the accuracy(89%)
+<img width="1590" height="490" alt="0130" src="https://github.com/user-attachments/assets/87f02338-7f03-411b-b954-20a3a99fa1e9" />
+
+
+### problem(maximum performance to this model)
+- SGD takes a much longer time to converge than AdamW,but it is still powerful
+- as model doesn't show overfitting trend, but literally there is nothing to learn anymore, both training and validation loss get saturated, so when I try to reach that point, I alleviate label-smooting, so it looks like squeezing accuracy a little bit more like 1.5%
+- Final training : K-fold takes too much time, but instead of that I use retrain all of dataset(includng validation set), it gives 0.4% augument of accuracy(**but it looks like gambling beacuse adjusting learning rate is quite tricky and we can't know which one is the best model without validation set**
+- I try to add one more block at last step hoping it helps learning more, but it doesn't help at all(increasing width seems to be better, but I will pass it to next expriement(less time left)
+### Analysis
+- As this model, it looks like reaching the maximum performance, but still one day left I will try to experiment another way
+
 
