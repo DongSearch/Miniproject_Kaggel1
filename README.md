@@ -83,7 +83,6 @@ reach to best accruacy with balanced and less data sets
 - optimizer(SGD) -> Adam
 
 
-## 🧠 Diary(Detail)
 ### Trial(Jan 24)
 - change SGD to AdamW
 - add Data Augumentation(hoizeontalflip, randomrotation,colorjitter)
@@ -101,7 +100,7 @@ reach to best accruacy with balanced and less data sets
 - need to figure out which type of classs or images get error mostly
 - might reduce the size of kernel
 
-## 🧠 Diary(Detail)
+
 ### Trial(Jan 25)
 - reduce batch_size : 64 ->32
 - add Data Augumentation(masking)
@@ -123,7 +122,7 @@ reach to best accruacy with balanced and less data sets
 - resnet dosen't have dropout
 - Batch Normalizaiton vs Group Normalization???
 
-## 🧠 Diary(Detail)
+
 ### Trial(Jan 26)
 - increase batch_size : 64(32 batch norm is a little bit unstable)
 - add Data Augumentation(Cutmix/Mixup)
@@ -135,7 +134,6 @@ reach to best accruacy with balanced and less data sets
 ### result
 - improve the accuracy(74%)
 <img width="1587" height="490" alt="image" src="https://github.com/user-attachments/assets/3bbb3346-d43e-42b7-9ffb-32031d78192f" />
-
 
 ### problem(low accuracy)
 - not overfitting, but there's nothing to learn, which means both loss can't decrease and acc can't improve
@@ -169,7 +167,6 @@ reach to best accruacy with balanced and less data sets
 - too much augumentation!
 
 
-## 🧠 Diary(Detail)
 ### Trial(Jan 28)
 - remove K-fold
 - remove SE Block
@@ -211,6 +208,7 @@ reach to best accruacy with balanced and less data sets
 - 8% arise unstable vibration, but label scheudling and dynamic label-smoothing help converging, but I also try it with 5%, it doesn't give trustable result at all
 ### Analysis
 - As this model, it looks like reaching the maximum performance, but still one day left I will try to experiment another way
+
 
 ### Trial(Jan 30) - experiment
 - AdamW
