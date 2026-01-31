@@ -1,4 +1,4 @@
-# 🛠 Consequence(Summary) 🏆:
+# 🛠 Consequence(Summary) 🏆
 ## Goal : 
 reach to best accruacy with balanced and less data sets
 ## Condition
