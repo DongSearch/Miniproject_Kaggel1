@@ -1,19 +1,40 @@
-## 🎯 Goal: 
-we need to improve performance of our custome model with small image datesets
-
-### Condition : 
+# 🛠 Consequence(Summary) 🏆:
+## Goal : 
+reach to best accruacy with balanced and less data sets
+## Condition
 - training data : 5k,3x96x96, class:10(balanced dataset)
 - test data : 8k 3x96x96, class:10(balanced dataset)
 - no pretrained model
 - no change number of seed(0)
+## Rank
+- 2nd(89.4%)
+<img width="529" height="49" alt="image" src="https://github.com/user-attachments/assets/ac22459a-e9fd-47a3-af56-942a4f1d0e14" />
+
+## Used Algorithm
+- model : Custom RestNet + SE Block + Drop path : 64(2)-128(2)-256(2)-512(2) Blocks
+- optimizer : Warmup LRscheduling(Linear) + main LRscheduling(CosineAnnealing)- AdamW 
+- Criterion : SoftTargetCrossEntorpy(for Mixup/Cutmix) + CrossEntropy + dynamic label-smoothing
+- Data-Preprocessing : RandAugment,HorizontalFlip,Mixup/Cutmix
+- Technique : TTA + EMA
+
+## Result(92% unofficially)
+<img width="1590" height="490" alt="image" src="https://github.com/user-attachments/assets/0fea8373-5afb-496a-87b1-e4ad7429d44e" />
+<img width="1934" height="790" alt="image" src="https://github.com/user-attachments/assets/ed13b827-afb7-4e47-9400-81a9986a8ce6" />
+
+
+
+
+
+
+# My Journey
 
 ## 🛠 Algorithms Used(& Trial):
 ### optimization
 - AdamW -> SGD Momentum -> SWOT -> SGD
 - Earlystopping
-- warmup scheduler(Linear) ❌
+- warmup scheduler(Linear) 
 - main scheudler(ConsineAnnealingLR)
-- Dynamic label-scheudling
+- Dynamic label smoothing scheudling
 ### config
 - epoch : 10 -> 50 -> 100->120->200
 - batchsize : 128->64->32->64
@@ -33,7 +54,7 @@ we need to improve performance of our custome model with small image datesets
 - last layer : output 1000 -> 10 ❌ 
 - label smoothing 
 - Stochastic Depth
-- SE Bloc
+- SE Block
 - K-Fold❌
 
 ## 📅 Key milestone(summary)
@@ -191,4 +212,22 @@ we need to improve performance of our custome model with small image datesets
 ### Analysis
 - As this model, it looks like reaching the maximum performance, but still one day left I will try to experiment another way
 
+### Trial(Jan 30) - experiment
+- AdamW
+- EMA
+- reduce label-smoothing
+- back to validation set(10%)
+  
+### result
+- improve the accuracy(92%)
+<img width="1590" height="490" alt="image" src="https://github.com/user-attachments/assets/82364cc7-7fce-4a56-a898-e3834fd26740" />
+<img width="1934" height="790" alt="image" src="https://github.com/user-attachments/assets/3323a60b-9c17-49ce-a04f-a19914a956b0" />
+
+### problem(maximum performance to this model)
+- SGD is very sensitive to adjust learning schedule and slow convergence, so I change it to AdamW
+- increase validation-set(5%->10%), which is more stable and less variation
+- increase Mixup-cutimix step(50 epochs -> 100 epochs) hoping they can learn more different pattern
+- EMA guarantee stable learning with higher accuracy
+- when I analysis confusion Matrix,  class 1, 3, 5 has less accuracy(these classes are car, lions, horses, but some pictures are unclear,which has behind view, put them with other objet, less distinctable from backround)
+ 
 
